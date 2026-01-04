@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import "../index.css";
 import Providers from "@/components/providers";
-import Header from "@/components/header";
 
-const instrumentSans = Instrument_Sans({
+const plexSans = IBM_Plex_Sans({
 	variable: "--font-sans",
 	subsets: ["latin"],
-	weight: ["400", "500", "600", "700"],
+	weight: ["400", "500", "600"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const plexMono = IBM_Plex_Mono({
 	variable: "--font-mono",
 	subsets: ["latin"],
 	weight: ["400", "500"],
@@ -18,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
 	title: "regexscope",
-	description: "regexscope",
+	description: "Visual pattern builder for find & replace",
 };
 
 export default function RootLayout({
@@ -27,16 +26,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" className="dark" suppressHydrationWarning>
 			<body
-				className={`${instrumentSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+				className={`${plexSans.variable} ${plexMono.variable} font-sans antialiased`}
 			>
-				<Providers>
-					<div className="grid grid-rows-[auto_1fr] h-svh">
-						<Header />
-						{children}
-					</div>
-				</Providers>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);
