@@ -66,8 +66,8 @@ export function generateReplacement(
 		} else {
 			// Use the captureIndex directly from the segment (set by parser)
 			// or look it up via refersToTokenId for backwards compatibility
-			let captureIndex = segment.captureIndex;
-			if (!captureIndex && segment.refersToTokenId) {
+			let captureIndex: number | undefined = segment.captureIndex;
+			if (captureIndex === undefined && segment.refersToTokenId) {
 				captureIndex = captureMap.get(segment.refersToTokenId);
 			}
 			if (captureIndex !== undefined) {
