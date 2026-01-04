@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Copy, Check } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { Copy, Check, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useVisualRegex } from "@/hooks/use-visual-regex";
 import { cn } from "@/lib/utils";
 import { TOKEN_DEFINITIONS } from "@/lib/visual-regex/token-definitions";
@@ -12,19 +13,19 @@ import type {
 	ReplaceSegment,
 } from "@/lib/visual-regex/types";
 
-// Muted token colors for dark theme
+// Token colors that work in both light and dark modes
 const TOKEN_COLORS: Record<string, string> = {
-	word: "bg-pink-500/20 text-pink-400",
-	words: "bg-pink-500/20 text-pink-400",
-	number: "bg-sky-500/20 text-sky-400",
-	decimal: "bg-sky-500/20 text-sky-400",
-	character: "bg-violet-500/20 text-violet-400",
-	characters: "bg-violet-500/20 text-violet-400",
-	whitespace: "bg-neutral-500/20 text-neutral-400",
-	letter: "bg-emerald-500/20 text-emerald-400",
-	letters: "bg-emerald-500/20 text-emerald-400",
-	start: "bg-cyan-500/20 text-cyan-400",
-	end: "bg-cyan-500/20 text-cyan-400",
+	word: "bg-pink-500/15 text-pink-600 dark:bg-pink-500/20 dark:text-pink-400",
+	words: "bg-pink-500/15 text-pink-600 dark:bg-pink-500/20 dark:text-pink-400",
+	number: "bg-sky-500/15 text-sky-600 dark:bg-sky-500/20 dark:text-sky-400",
+	decimal: "bg-sky-500/15 text-sky-600 dark:bg-sky-500/20 dark:text-sky-400",
+	character: "bg-violet-500/15 text-violet-600 dark:bg-violet-500/20 dark:text-violet-400",
+	characters: "bg-violet-500/15 text-violet-600 dark:bg-violet-500/20 dark:text-violet-400",
+	whitespace: "bg-neutral-500/15 text-neutral-600 dark:bg-neutral-500/20 dark:text-neutral-400",
+	letter: "bg-emerald-500/15 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400",
+	letters: "bg-emerald-500/15 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400",
+	start: "bg-cyan-500/15 text-cyan-600 dark:bg-cyan-500/20 dark:text-cyan-400",
+	end: "bg-cyan-500/15 text-cyan-600 dark:bg-cyan-500/20 dark:text-cyan-400",
 };
 
 const FRIENDLY_NAMES: Record<string, string> = {
@@ -45,8 +46,14 @@ export function VisualFindReplace() {
 	const [showTokens, setShowTokens] = useState(false);
 	const [copied, setCopied] = useState(false);
 	const [selectedExample, setSelectedExample] = useState<string | null>(null);
+	const [mounted, setMounted] = useState(false);
+	const { theme, setTheme } = useTheme();
 
 	const findInputRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const {
 		findPattern,
@@ -114,10 +121,26 @@ export function VisualFindReplace() {
 		<div className="flex w-full">
 			{/* Sidebar - Examples */}
 			<aside className="flex w-52 shrink-0 flex-col border-r border-border">
-				<div className="p-4">
+				<div className="flex items-center justify-between p-4">
 					<span className="font-mono text-muted-foreground text-xs tracking-wider uppercase">
 						regexscope
 					</span>
+					<button
+						type="button"
+						onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+						className="rounded p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+						aria-label="Toggle theme"
+					>
+						{mounted ? (
+							theme === "dark" ? (
+								<Sun className="size-3.5" />
+							) : (
+								<Moon className="size-3.5" />
+							)
+						) : (
+							<span className="size-3.5" />
+						)}
+					</button>
 				</div>
 				<nav className="flex-1 overflow-y-auto px-2 pb-4">
 					<div className="mb-2 px-2 font-mono text-muted-foreground/60 text-xs">
@@ -329,7 +352,7 @@ export function VisualFindReplace() {
 						{sampleText && matchCount > 0 && (
 							<div className="flex items-center gap-3">
 								<span className="w-10 shrink-0" />
-								<div className="font-mono text-emerald-400 text-sm">
+								<div className="font-mono text-emerald-600 dark:text-emerald-400 text-sm">
 									{previewResult}
 								</div>
 							</div>
@@ -375,7 +398,7 @@ function ReplaceSegmentChip({ segment }: { segment: ReplaceSegment }) {
 
 	if (segment.kind === "capture-ref") {
 		return (
-			<span className="rounded bg-emerald-500/20 px-1.5 py-0.5 font-mono text-emerald-400 text-xs">
+			<span className="rounded bg-emerald-500/15 px-1.5 py-0.5 font-mono text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400 text-xs">
 				${segment.captureIndex}
 			</span>
 		);
