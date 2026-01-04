@@ -2,3 +2,5 @@ node_modules
 .turbo
 .alchemy
 .env.playwright-mcp/
+.vercel
+.env*.local
