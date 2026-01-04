@@ -14,8 +14,8 @@ import type {
 
 // Muted token colors for dark theme
 const TOKEN_COLORS: Record<string, string> = {
-	word: "bg-amber-500/20 text-amber-400",
-	words: "bg-amber-500/20 text-amber-400",
+	word: "bg-pink-500/20 text-pink-400",
+	words: "bg-pink-500/20 text-pink-400",
 	number: "bg-sky-500/20 text-sky-400",
 	decimal: "bg-sky-500/20 text-sky-400",
 	character: "bg-violet-500/20 text-violet-400",
@@ -23,8 +23,8 @@ const TOKEN_COLORS: Record<string, string> = {
 	whitespace: "bg-neutral-500/20 text-neutral-400",
 	letter: "bg-emerald-500/20 text-emerald-400",
 	letters: "bg-emerald-500/20 text-emerald-400",
-	start: "bg-rose-500/20 text-rose-400",
-	end: "bg-rose-500/20 text-rose-400",
+	start: "bg-cyan-500/20 text-cyan-400",
+	end: "bg-cyan-500/20 text-cyan-400",
 };
 
 const FRIENDLY_NAMES: Record<string, string> = {

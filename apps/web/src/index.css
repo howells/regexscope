@@ -8,9 +8,9 @@
 	--font-mono: var(--font-mono), ui-monospace, monospace;
 
 	/* Token colors - muted but distinct */
-	--token-word: oklch(0.78 0.12 55);
+	--token-word: oklch(0.75 0.12 350);
 	--token-number: oklch(0.72 0.11 220);
-	--token-any: oklch(0.74 0.10 320);
+	--token-any: oklch(0.74 0.10 290);
 	--token-space: oklch(0.68 0.06 260);
 	--token-anchor: oklch(0.70 0.08 150);
 	--capture: oklch(0.75 0.12 160);
@@ -33,18 +33,18 @@ body {
 	--card-foreground: oklch(0.93 0 0);
 	--popover: oklch(0.13 0 0);
 	--popover-foreground: oklch(0.93 0 0);
-	--primary: oklch(0.78 0.12 55);
+	--primary: oklch(0.75 0.12 350);
 	--primary-foreground: oklch(0.15 0 0);
 	--secondary: oklch(0.18 0 0);
 	--secondary-foreground: oklch(0.93 0 0);
 	--muted: oklch(0.18 0 0);
-	--muted-foreground: oklch(0.55 0 0);
+	--muted-foreground: oklch(0.63 0 0);
 	--accent: oklch(0.18 0 0);
 	--accent-foreground: oklch(0.93 0 0);
 	--destructive: oklch(0.65 0.2 25);
-	--border: oklch(0.22 0 0);
+	--border: oklch(0.25 0 0);
 	--input: oklch(0.16 0 0);
-	--ring: oklch(0.78 0.12 55);
+	--ring: oklch(0.75 0.12 350);
 }
 
 @theme inline {
