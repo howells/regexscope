@@ -167,27 +167,27 @@ export function VisualFindReplace() {
 				</nav>
 			</aside>
 
-			{/* Main content */}
-			<div className="flex flex-1 items-start justify-center px-8 pt-[12vh]">
-				<div className="w-full max-w-lg space-y-6">
-					{/* Header with clear button */}
-					<div className="flex items-center justify-between">
-						<span className="font-mono text-muted-foreground/60 text-xs">
-							{selectedExample ? selectedExample : "pattern builder"}
-						</span>
-						{findPattern && (
-							<button
-								type="button"
-								onClick={handleClear}
-								className="font-mono text-muted-foreground text-xs transition-colors hover:text-foreground"
-							>
-								clear
-							</button>
-						)}
-					</div>
+			{/* Main content - two column layout */}
+			<div className="flex flex-1 items-start px-8 pt-[10vh]">
+				<div className="mx-auto flex w-full max-w-4xl gap-12">
+					{/* Left column - Pattern configuration */}
+					<div className="flex-1 space-y-5">
+						{/* Header with clear button */}
+						<div className="flex items-center justify-between">
+							<span className="font-mono text-muted-foreground/60 text-xs">
+								{selectedExample ? selectedExample : "pattern builder"}
+							</span>
+							{findPattern && (
+								<button
+									type="button"
+									onClick={handleClear}
+									className="font-mono text-muted-foreground text-xs transition-colors hover:text-foreground"
+								>
+									clear
+								</button>
+							)}
+						</div>
 
-					{/* Main input area */}
-					<div className="space-y-4">
 						{/* Find field */}
 						<div className="group relative">
 							<div className="flex items-center gap-3">
@@ -297,62 +297,66 @@ export function VisualFindReplace() {
 								</div>
 							)}
 						</div>
-					</div>
 
-					{/* Generated output & copy - always visible when there's a pattern */}
-					<div
-						className={cn(
-							"flex items-start justify-between gap-4 rounded-md bg-muted/50 p-3 transition-opacity",
-							generatedPattern ? "opacity-100" : "opacity-0"
-						)}
-					>
-						<div className="min-w-0 flex-1 space-y-1">
-							<div className="truncate font-mono text-xs">
-								<span className="text-muted-foreground">→ </span>
-								{generatedPattern || "pattern"}
-							</div>
-							<div className="truncate font-mono text-xs">
-								<span className="text-muted-foreground">← </span>
-								{generatedReplacement || "replacement"}
-							</div>
-						</div>
-						<button
-							type="button"
-							onClick={handleCopy}
-							disabled={!isValid || !generatedPattern}
-							className="shrink-0 rounded bg-primary px-3 py-1.5 font-mono text-primary-foreground text-xs transition-colors hover:bg-primary/90 disabled:opacity-50"
-						>
-							{copied ? (
-								<Check className="size-3.5" />
-							) : (
-								<Copy className="size-3.5" />
+						{/* Generated output & copy */}
+						<div
+							className={cn(
+								"flex items-start justify-between gap-4 rounded-md bg-muted/50 p-3 transition-opacity",
+								generatedPattern ? "opacity-100" : "opacity-0"
 							)}
-						</button>
+						>
+							<div className="min-w-0 flex-1 space-y-1">
+								<div className="truncate font-mono text-xs">
+									<span className="text-muted-foreground">→ </span>
+									{generatedPattern || "pattern"}
+								</div>
+								<div className="truncate font-mono text-xs">
+									<span className="text-muted-foreground">← </span>
+									{generatedReplacement || "replacement"}
+								</div>
+							</div>
+							<button
+								type="button"
+								onClick={handleCopy}
+								disabled={!isValid || !generatedPattern}
+								className="shrink-0 rounded bg-primary px-3 py-1.5 font-mono text-primary-foreground text-xs transition-colors hover:bg-primary/90 disabled:opacity-50"
+							>
+								{copied ? (
+									<Check className="size-3.5" />
+								) : (
+									<Copy className="size-3.5" />
+								)}
+							</button>
+						</div>
 					</div>
 
-					{/* Test area - always visible */}
-					<div className="space-y-2">
-						<div className="flex items-center gap-3">
-							<span className="w-10 shrink-0 font-mono text-muted-foreground text-xs">
+					{/* Right column - Test area */}
+					<div className="w-80 shrink-0 space-y-4">
+						<div className="flex items-center justify-between">
+							<span className="font-mono text-muted-foreground/60 text-xs">
 								test
 							</span>
-							<input
-								type="text"
-								value={sampleText}
-								onChange={(e) => setSampleText(e.target.value)}
-								placeholder="paste sample text..."
-								className="w-full border-b border-border bg-transparent py-2 font-mono text-sm outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary/50"
-							/>
 							{matchCount > 0 && (
-								<span className="shrink-0 font-mono text-muted-foreground text-xs">
-									{matchCount}×
+								<span className="font-mono text-muted-foreground text-xs">
+									{matchCount} match{matchCount !== 1 ? "es" : ""}
 								</span>
 							)}
 						</div>
+
+						<textarea
+							value={sampleText}
+							onChange={(e) => setSampleText(e.target.value)}
+							placeholder="paste sample text to test your pattern..."
+							rows={4}
+							className="w-full resize-none rounded-md border border-border bg-transparent p-3 font-mono text-sm outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-primary/50"
+						/>
+
 						{sampleText && matchCount > 0 && (
-							<div className="flex items-center gap-3">
-								<span className="w-10 shrink-0" />
-								<div className="font-mono text-emerald-600 dark:text-emerald-400 text-sm">
+							<div className="space-y-2">
+								<span className="font-mono text-muted-foreground/60 text-xs">
+									result
+								</span>
+								<div className="rounded-md bg-muted/50 p-3 font-mono text-emerald-600 dark:text-emerald-400 text-sm">
 									{previewResult}
 								</div>
 							</div>
