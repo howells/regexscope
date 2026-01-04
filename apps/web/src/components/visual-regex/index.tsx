@@ -203,23 +203,23 @@ export function VisualFindReplace() {
 										className="fixed inset-0 z-40"
 										onClick={() => setShowTokens(false)}
 									/>
-									<div className="absolute top-full right-0 z-50 mt-2 w-48 rounded-md border border-border bg-card p-1 shadow-lg">
+									<div className="absolute top-full right-0 z-50 mt-2 rounded-md border border-border bg-card p-1 shadow-lg">
 										{TOKEN_DEFINITIONS.map((token) => (
 											<button
 												key={token.type}
 												type="button"
 												onClick={() => handleInsertToken(token.type)}
-												className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left transition-colors hover:bg-muted"
+												className="flex w-full items-center gap-3 rounded px-2 py-1.5 text-left transition-colors hover:bg-muted"
 											>
 												<code
 													className={cn(
-														"rounded px-1.5 py-0.5 font-mono text-xs",
+														"w-20 shrink-0 rounded px-1.5 py-0.5 text-center font-mono text-xs",
 														TOKEN_COLORS[token.type]
 													)}
 												>
 													{token.type}
 												</code>
-												<span className="text-muted-foreground text-xs">
+												<span className="whitespace-nowrap text-muted-foreground text-xs">
 													{token.description}
 												</span>
 											</button>
