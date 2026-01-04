@@ -4,9 +4,16 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-	--font-sans:
-		"Inter", "Geist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+	--font-mono: var(--font-mono), ui-monospace, monospace;
+
+	/* Token colors - warm and approachable */
+	--token-word: oklch(0.75 0.15 55);
+	--token-number: oklch(0.7 0.14 200);
+	--token-any: oklch(0.72 0.12 320);
+	--token-space: oklch(0.65 0.08 260);
+	--token-anchor: oklch(0.68 0.1 150);
+	--capture: oklch(0.72 0.14 145);
 }
 
 html,
