@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
+  "ui": "stream",
   "tasks": {
     "build": {
       "dependsOn": [
@@ -12,7 +12,8 @@
       ],
       "outputs": [
         "dist/**"
-      ]
+      ],
+      "cache": false
     },
     "lint": {
       "dependsOn": [
@@ -29,6 +30,13 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "clean": {
+      "cache": false
     }
-  }
+  },
+  "globalDependencies": [
+    "**/.env",
+    "**/.env.local"
+  ]
 }
