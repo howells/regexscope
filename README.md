@@ -1,49 +1,46 @@
 # regexscope
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, and more.
+A visual regex debugger that lets you build find-and-replace patterns using named tokens instead of raw regex syntax. Type a pattern like `bg-{word}-{number}`, see the parsed segments highlighted in real time, test against sample text, and copy the generated regex.
 
-## Features
+## What it does
 
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - Reusable UI components
-- **Biome** - Linting and formatting
-- **Turborepo** - Optimized monorepo build system
+- **Token-based pattern building** -- insert wildcards like `{word}`, `{number}`, `{letter}`, `{whitespace}` etc. into a find pattern. Each token maps to a regex character class.
+- **Live replacement preview** -- define a replacement string with capture references (`{1}`, `{2}`) and see the result applied to sample text immediately.
+- **Generated regex output** -- the tool compiles your friendly pattern into standard regex + replacement strings, ready to copy into code or editor.
+- **Example library** -- sidebar with preloaded patterns demonstrating common use cases.
 
-## Getting Started
-
-First, install the dependencies:
+## Running locally
 
 ```bash
 pnpm install
-```
-
-
-Then, run the development server:
-
-```bash
 pnpm dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
+Opens at [http://localhost:28000](http://localhost:28000).
 
-
-
-
-
-## Project Structure
+## Project structure
 
 ```
 regexscope/
 ├── apps/
-│   ├── web/         # Frontend application (Next.js)
+│   └── web/         # Next.js frontend
+│       └── src/
+│           ├── app/             # Next.js app router pages
+│           ├── components/      # UI and visual-regex components
+│           ├── hooks/           # useVisualRegex hook
+│           └── lib/             # Token definitions, types, examples
+├── biome.json       # Linting (via @howells/lint)
+├── turbo.json       # Turborepo config
+└── package.json
 ```
 
-## Available Scripts
+## Scripts
 
-- `pnpm dev`: Start all applications in development mode
-- `pnpm build`: Build all applications
-- `pnpm dev:web`: Start only the web application
-- `pnpm check-types`: Check TypeScript types across all apps
-- `pnpm check`: Run Biome formatting and linting
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start the web app in dev mode |
+| `pnpm build` | Build all workspaces |
+| `pnpm check` | Run Biome formatting and linting |
+| `pnpm lint` | Lint only |
+| `pnpm format` | Format only |
+| `pnpm check-types` | TypeScript type checking |

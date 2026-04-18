@@ -1,5 +1,3 @@
 {
-	"compilerOptions": {
-		"strictNullChecks": true
-	}
+	"extends": "@howells/typescript-config/bundler-dom-app"
 }
